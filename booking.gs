@@ -7,31 +7,52 @@ const FEMALE_DELAY_HOURS = 72;
 
 const staff = [
   {
-    id: "8f5a2058dbb70b1028c36cd793f7ece3706b44866d327860c099cbe067ea8d49@group.calendar.google.com",
+    id: "luisfelipe.pipe@apontebh.com.br",
     name: "Pr. Luís Felipe (Pipe)",
     gender: "MALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Pipe.png?raw=true",
     counselingTypes: ["personally"],
   },
   {
-    id: "6be2d2d55040fed5a76881a9f4a7e1fe4a1cca6014cd152a1f9daf1b17d947ac@group.calendar.google.com",
-    name: "Déborah Zica",
-    gender: "FEMALE",
-    imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Deborah.png?raw=true",
-    counselingTypes: ["personally"],
-  },
-  {
-    id: "4da4df3d7596f92cd3eac1ef9769d6b116b813b08586206cddad49498b7a57db@group.calendar.google.com",
-    name: "Karine Guedes",
-    gender: "FEMALE",
-    imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Karine%20Guedes.png?raw=true",
-    counselingTypes: ["personally"],
-  },
-  {
-    id: "7b2294effce14a7c68cc129bd870dd5eb30d7fb5c4c51edc9c69bc2dfb707877@group.calendar.google.com",
+    id: "tiagoguedes@apontebh.com.br",
     name: "Pr. Tiago Guedes",
     gender: "MALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Tiago%20Guedes.png?raw=true",
+    counselingTypes: ["personally", "online"],
+  },
+  {
+    id: "felipe.americano@apontebh.com.br",
+    name: "Pr. Felipe Americano",
+    gender: "MALE",
+    imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Felipe%20Americano.png?raw=true",
+    counselingTypes: ["personally"],
+  },
+  {
+    id: "c_9f7f5ec9f013e2e07d3d9f4b0238e459390e0696d29720a966d9451f9e18e3f6@group.calendar.google.com",
+    name: "Déborah Zica",
+    gender: "FEMALE",
+    imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Deborah.png?raw=true",
+    counselingTypes: ["personally", "online"],
+  },
+  {
+    id: "c_d02199862bc25b2d49345027c40fb190627f8ada91f9426f847b6f0dc249f66b@group.calendar.google.com",
+    name: "Karine Guedes",
+    gender: "FEMALE",
+    imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Karine%20Guedes.png?raw=true",
+    counselingTypes: ["personally", "online"],
+  },
+  {
+    id: "c_5ad67ce8ce7b8b5db4ab03b93d8ef512126ec40428eaf8bc4ee5ca0e5fb408b0@group.calendar.google.com",
+    name: "Mariana Guzzoni",
+    gender: "FEMALE",
+    imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Mari%20Guzzoni.png?raw=true",
+    counselingTypes: ["personally", "online"],
+  },
+  {
+    id: "c_59b251045fc909eaccb0c2f976ef99b2451c18e2abb4a87c53190c253ec93a0d@group.calendar.google.com",
+    name: "Mary Ebenézer",
+    gender: "FEMALE",
+    imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Logo%20(6).png?raw=true",
     counselingTypes: ["personally", "online"],
   },
 ];
