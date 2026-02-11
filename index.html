@@ -24,6 +24,13 @@
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
+
+    .custom-scrollbar {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      overflow-y: auto;
+      transform: translateZ(0);
+    }
   </style>
 </head>
 
@@ -464,7 +471,7 @@
             Voltar
           </button>
         </div>
-        <div id="slots-container" class="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"></div>
+        <div id="slots-container" class="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar relative touch-pan-y"></div>
       </div>
 
       <div id="step-form" class="hidden space-y-4">
