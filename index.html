@@ -24,13 +24,6 @@
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
-
-    .custom-scrollbar {
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
-      overflow-y: auto;
-      transform: translateZ(0);
-    }
   </style>
 </head>
 
@@ -42,7 +35,7 @@
   </script>
 
   <div class="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
-    <div class="bg-red-500 p-6 text-white text-center">
+    <div class="bg-teal-600 p-6 text-white text-center">
       <h1 class="text-2xl font-bold">Aconselhamento</h1>
       <p class="text-teal-100 text-sm mt-1">
         Siga os passos para agendar seu horário
@@ -471,7 +464,7 @@
             Voltar
           </button>
         </div>
-        <div id="slots-container" class="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar relative touch-pan-y"></div>
+        <div id="slots-container" class="space-y-3 pr-2"></div>
       </div>
 
       <div id="step-form" class="hidden space-y-4">
