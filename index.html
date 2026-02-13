@@ -784,11 +784,11 @@
 
 
       if (currentType === 'online') {
-        locationEl.innerHTML = '<span class="text-teal-600 font-medium">Enviaremos o link do Google Meet no dia do agendamento.</span><br><span class="text-teal-600 font-medium">Caso precise cancelar ou alterar seu horário, entre em contato com a secretaria.</span>';
+        locationEl.innerHTML = '<span class="text-teal-600 font-medium">Enviaremos o link do Google Meet no dia do agendamento.</span><br><span class="text-slate-400 font-medium">Caso precise cancelar ou alterar seu horário, entre em contato com a secretaria.</span>';
       } else {
 
         const addrToUse = address || location || "Endereço não informado";
-        locationEl.innerHTML = `Local: <span class="font-semibold text-slate-700">${addrToUse}</span><br><span class="text-teal-600 font-medium">Caso precise cancelar ou alterar seu horário, entre em contato com a secretaria.</span>`;
+        locationEl.innerHTML = `Local: <span class="font-semibold text-slate-700">${addrToUse}</span><br><span class="text-slate-400 font-medium">Caso precise cancelar ou alterar seu horário, entre em contato com a secretaria.</span>`;
       }
     }
   </script>
