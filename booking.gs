@@ -18,7 +18,7 @@ const staff = [{
   },
   {
     id: "tiagoguedes@apontebh.com.br",
-    contactEmail: "alvesarthurgalo@gmail.com",
+    contactEmail: "tiagoguedes@apontebh.com.br",
     name: "Pr. Tiago Guedes",
     gender: "MALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Tiago%20Guedes.png?raw=true",
@@ -54,7 +54,7 @@ const staff = [{
   },
   {
     id: "c_d715b4d21215b8b6ddbe047e6eabbde8e23298b95be0ccbe9f97d8f9ccb4a3e8@group.calendar.google.com",
-    contactEmail: "germano@apontebh.com.br",
+    contactEmail: "germanoalexalves@yahoo.com.br",
     name: "Germano Alves",
     gender: "MALE",
     imageUrl: "",
@@ -66,7 +66,7 @@ const staff = [{
   },
   {
     id: "c_7a719c1aae8a29117abd974134bf2e03a432c61b4e1d97837e4c2715ccd99019@group.calendar.google.com",
-    contactEmail: "sulanio@apontebh.com.br",
+    contactEmail: "sulanio.wendell@gmail.com",
     name: "Sulânio Hiderick",
     gender: "MALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Sula%CC%80nio.jpeg?raw=true",
@@ -78,7 +78,7 @@ const staff = [{
   },
   {
     id: "c_9f7f5ec9f013e2e07d3d9f4b0238e459390e0696d29720a966d9451f9e18e3f6@group.calendar.google.com",
-    contactEmail: "deborah@apontebh.com.br",
+    contactEmail: "dezicalima@gmail.com",
     name: "Déborah Zica",
     gender: "FEMALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Deborah.png?raw=true",
@@ -90,7 +90,7 @@ const staff = [{
   },
   {
     id: "c_d02199862bc25b2d49345027c40fb190627f8ada91f9426f847b6f0dc249f66b@group.calendar.google.com",
-    contactEmail: "karine@apontebh.com.br",
+    contactEmail: "kandradeguedes@gmail.com",
     name: "Karine Guedes",
     gender: "FEMALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Karine%20Guedes.png?raw=true",
@@ -102,7 +102,7 @@ const staff = [{
   },
   {
     id: "c_5ad67ce8ce7b8b5db4ab03b93d8ef512126ec40428eaf8bc4ee5ca0e5fb408b0@group.calendar.google.com",
-    contactEmail: "mariana@apontebh.com.br",
+    contactEmail: "guzzonimariana@gmail.com",
     name: "Mariana Guzzoni",
     gender: "FEMALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Mari%20Guzzoni.png?raw=true",
@@ -114,7 +114,7 @@ const staff = [{
   },
   {
     id: "c_59b251045fc909eaccb0c2f976ef99b2451c18e2abb4a87c53190c253ec93a0d@group.calendar.google.com",
-    contactEmail: "mary@apontebh.com.br",
+    contactEmail: "rmaryscunha@gmail.com",
     name: "Mary Ebenézer",
     gender: "FEMALE",
     imageUrl: "https://github.com/comunicaponte/site-a-ponte/blob/main/images/Logo%20(6).png?raw=true",
@@ -164,7 +164,6 @@ function doGet(e) {
       ContentService.MimeType.JSON
     );
   } else {
-
     try {
       return HtmlService.createHtmlOutputFromFile('index')
         .setTitle('Agendamento')
@@ -183,18 +182,28 @@ function getWeekKey(date) {
   return Utilities.formatDate(d, Session.getScriptTimeZone(), "yyyy-MM-dd");
 }
 
+
+
 function getUsageCounts(events) {
   const daily = {};
   const weekly = {};
 
   events.forEach(e => {
-    if (e.getTitle().trim() !== AVAILABILITY_KEYWORD && !e.isAllDayEvent()) {
-      const start = e.getStartTime();
-      const dateKey = Utilities.formatDate(start, Session.getScriptTimeZone(), "yyyy-MM-dd");
-      const weekKey = getWeekKey(start);
 
-      daily[dateKey] = (daily[dateKey] || 0) + 1;
-      weekly[weekKey] = (weekly[weekKey] || 0) + 1;
+    if (!e.isAllDayEvent()) {
+      const title = e.getTitle().trim();
+
+
+      const isOfficialBooking = title.startsWith("Entrevista Pastoral") || title.startsWith("Aconselhamento Pastoral");
+
+      if (isOfficialBooking) {
+        const start = e.getStartTime();
+        const dateKey = Utilities.formatDate(start, Session.getScriptTimeZone(), "yyyy-MM-dd");
+        const weekKey = getWeekKey(start);
+
+        daily[dateKey] = (daily[dateKey] || 0) + 1;
+        weekly[weekKey] = (weekly[weekKey] || 0) + 1;
+      }
     }
   });
 
@@ -221,7 +230,6 @@ function getAvailableSlots(gender, counselingType) {
 
   eligibleStaff.forEach((person) => {
     try {
-
       let earliestStart = new Date(now);
       const delayHours = person.minDelayHours || 0;
       earliestStart.setHours(earliestStart.getHours() + delayHours);
@@ -230,11 +238,15 @@ function getAvailableSlots(gender, counselingType) {
       if (!cal) return;
 
       const allEvents = cal.getEvents(startDate, endDate);
+
+
       const usage = getUsageCounts(allEvents);
 
       const availabilityBlocks = allEvents.filter(
         (e) => e.getTitle().trim() === AVAILABILITY_KEYWORD
       );
+
+
 
       const busyEvents = allEvents.filter(
         (e) => e.getTitle().trim() !== AVAILABILITY_KEYWORD
@@ -247,7 +259,6 @@ function getAvailableSlots(gender, counselingType) {
         let iterTime = new Date(blockStart);
 
         while (iterTime.getTime() + SLOT_DURATION_MINUTES * 60000 <= blockEnd.getTime()) {
-
           let slotStart = new Date(iterTime);
 
           const dateKey = Utilities.formatDate(slotStart, Session.getScriptTimeZone(), "yyyy-MM-dd");
@@ -274,7 +285,6 @@ function getAvailableSlots(gender, counselingType) {
           let checkEnd = (postBufferEnd > blockEnd) ? sessionEnd : postBufferEnd;
 
           if (slotStart > now && slotStart >= earliestStart) {
-
             const isBlocked = busyEvents.some((busy) => {
               return (
                 Math.max(checkStart.getTime(), busy.getStartTime().getTime()) <
@@ -296,7 +306,6 @@ function getAvailableSlots(gender, counselingType) {
               consolidatedSlots[dateStr].add(timeStr);
             }
           }
-
           iterTime.setMinutes(iterTime.getMinutes() + SLOT_STEP_MINUTES);
         }
       });
@@ -342,7 +351,6 @@ function bookBestCalendar(dateStr, timeStr, gender, details) {
   const targetWeekKey = Utilities.formatDate(tempDate, Session.getScriptTimeZone(), "yyyy-MM-dd");
   const targetDateKey = dateStr;
 
-
   const loadStart = new Date(tempDate);
   const loadEnd = new Date(loadStart);
   loadEnd.setDate(loadEnd.getDate() + 7);
@@ -360,7 +368,6 @@ function bookBestCalendar(dateStr, timeStr, gender, details) {
 
   eligibleStaff.forEach((person) => {
     try {
-
       const now = new Date();
       const delayHours = person.minDelayHours || 0;
       const minStart = new Date(now.getTime() + (delayHours * 60 * 60 * 1000));
@@ -375,7 +382,6 @@ function bookBestCalendar(dateStr, timeStr, gender, details) {
 
       const currentDaily = usage.daily[targetDateKey] || 0;
       const currentWeekly = usage.weekly[targetWeekKey] || 0;
-
 
       if (currentDaily >= person.maxDailySlots || currentWeekly >= person.maxWeeklySlots) {
         return;
@@ -392,7 +398,6 @@ function bookBestCalendar(dateStr, timeStr, gender, details) {
       );
 
       if (availEvent && !hasConflict) {
-
         const blockStart = availEvent.getStartTime();
         const blockEnd = availEvent.getEndTime();
 
@@ -412,7 +417,6 @@ function bookBestCalendar(dateStr, timeStr, gender, details) {
         }
 
         if (!bufferConflict) {
-
           let totalBusyMillis = 0;
           weekEvents.forEach((e) => {
             if (e.getTitle().trim() !== AVAILABILITY_KEYWORD && !e.isAllDayEvent()) {
@@ -460,6 +464,7 @@ function bookBestCalendar(dateStr, timeStr, gender, details) {
 
       consumeAvailability(cal, bestAvailabilityEvent, finalCutStart, finalCutEnd);
 
+
       sendAppointmentEmails(details, bestCandidate, dateStr, timeStr);
 
       return {
@@ -502,10 +507,6 @@ function consumeAvailability(calendar, availEvent, voidStart, voidEnd) {
   }
 }
 
-/**
- * Função auxiliar para enviar e-mails de confirmação usando GmailApp
- * Design baseado na identidade visual do app (Teal/Slate)
- */
 function sendAppointmentEmails(details, counselor, dateStr, timeStr) {
   try {
     const parts = dateStr.split('-');
@@ -514,11 +515,13 @@ function sendAppointmentEmails(details, counselor, dateStr, timeStr) {
     const isOnline = details.counselingType === "online";
     const modeText = isOnline ? "On-line" : "Presencial";
 
+
     const locationInfo = isOnline ?
-      "Link do Google Meet (verifique o convite na sua agenda)" :
+      "Link do Google Meet (será enviado no dia)" :
       (counselor.counselingAddress || "Endereço a confirmar");
 
     const emailSubject = `Agendamento Confirmado: ${details.type} com ${counselor.name}`;
+
 
     const colors = {
       bgBody: "#0f172a",
@@ -529,6 +532,7 @@ function sendAppointmentEmails(details, counselor, dateStr, timeStr) {
       textGray: "#64748b",
       border: "#e2e8f0"
     };
+
 
     const htmlTemplate = (isForCounselor) => `
       <!DOCTYPE html>
@@ -636,8 +640,8 @@ function sendAppointmentEmails(details, counselor, dateStr, timeStr) {
                         Caso precise cancelar ou remarcar, por favor entre em contato com antecedência.
                       </p>
                       ${!isOnline ? `
-                      <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(counselor.counselingAddress)}" target="_blank" style="display: inline-block; margin-top: 10px; text-decoration: none; color: ${colors.primary}; font-weight: bold; font-size: 14px;">
-                        Ver localização no mapa →
+                      <a href="https://maps.google.com/?q=${encodeURIComponent(counselor.counselingAddress)}" target="_blank" style="display: inline-block; margin-top: 10px; text-decoration: none; color: ${colors.primary}; font-weight: bold; font-size: 14px;">
+                        Ver localização no mapa &rarr;
                       </a>
                       ` : ''}
                     </div>
@@ -657,30 +661,25 @@ function sendAppointmentEmails(details, counselor, dateStr, timeStr) {
       </html>
     `;
 
+
     if (details.email) {
-      GmailApp.sendEmail(
-        details.email,
-        emailSubject,
-        "Seu cliente de e-mail não suporta visualização HTML.", {
-          htmlBody: htmlTemplate(false),
-          name: "Agendamento - A Ponte"
-        }
-      );
+      MailApp.sendEmail({
+        to: details.email,
+        subject: emailSubject,
+        htmlBody: htmlTemplate(false)
+      });
     }
 
+
     if (counselor.contactEmail && counselor.contactEmail.includes("@")) {
-      GmailApp.sendEmail(
-        counselor.contactEmail,
-        `[NOVO AGENDAMENTO] ${details.name} - ${formattedDate}`,
-        "Seu cliente de e-mail não suporta visualização HTML.", {
-          htmlBody: htmlTemplate(true),
-          name: "Sistema de Agendamento"
-        }
-      );
+      MailApp.sendEmail({
+        to: counselor.contactEmail,
+        subject: `[NOVO AGENDAMENTO] ${details.name} - ${formattedDate}`,
+        htmlBody: htmlTemplate(true)
+      });
     }
 
   } catch (e) {
-    console.error("Erro ao enviar e-mails via GmailApp: " + e.message);
-
+    console.error("Erro ao enviar e-mails: " + e.message);
   }
 }
