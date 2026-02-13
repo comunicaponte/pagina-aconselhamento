@@ -27,7 +27,7 @@
   </style>
 </head>
 
-<body class="bg-black min-h-screen flex flex-col items-center py-10 px-4 font-sans text-slate-800">
+<body class="bg-black min-h-screen flex flex-col items-center justify-center py-10 px-4 font-sans text-slate-800">
   <script>
 
     const SCRIPT_URL =
@@ -431,13 +431,14 @@
 
         <div class="mt-8 text-center px-4">
           <p class="text-sm text-slate-500 leading-relaxed">
-            Caso nenhum horário disponível encaixe com o seu horário, ou você tem uma verdadeira urgência, entre em
+            Caso nenhum horário disponível encaixe com a sua disponibilidade, ou você tem uma verdadeira urgência, entre em
             contato com a secretaria através do número:
             <br>
             <a href="https://wa.me/31972340244" target="_blank"
               class="font-bold text-teal-600 hover:text-teal-700 transition-colors flex items-center justify-center gap-1 mt-1">
               <i class="ph ph-whatsapp-logo text-lg"></i> (31) 97234-0244
             </a>
+            OBS: agendamentos somente para congregados da Ponte BH.
           </p>
         </div>
 
@@ -783,11 +784,11 @@
 
 
       if (currentType === 'online') {
-        locationEl.innerHTML = '<span class="text-teal-600 font-medium">Enviaremos o link do Google Meet no dia do agendamento.</span>';
+        locationEl.innerHTML = '<span class="text-teal-600 font-medium">Enviaremos o link do Google Meet no dia do agendamento.</span><br><span class="text-teal-600 font-medium">Caso precise cancelar ou alterar seu horário, entre em contato com a secretaria.</span>';
       } else {
 
         const addrToUse = address || location || "Endereço não informado";
-        locationEl.innerHTML = `Local: <span class="font-semibold text-slate-700">${addrToUse}</span>`;
+        locationEl.innerHTML = `Local: <span class="font-semibold text-slate-700">${addrToUse}</span><br><span class="text-teal-600 font-medium">Caso precise cancelar ou alterar seu horário, entre em contato com a secretaria.</span>`;
       }
     }
   </script>
